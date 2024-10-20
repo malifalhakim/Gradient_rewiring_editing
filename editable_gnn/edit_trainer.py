@@ -7,7 +7,6 @@ from tqdm import tqdm
 from .trainer import BaseTrainer, WholeGraphTrainer
 from torch_geometric.data.data import Data
 from typing import Dict
-from .algs import ENN
 from .utils import safe_backward
 
 
