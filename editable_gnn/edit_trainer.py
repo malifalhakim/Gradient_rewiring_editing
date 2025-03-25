@@ -9,10 +9,12 @@ from torch_geometric.data.data import Data
 from typing import Dict
 from .utils import safe_backward
 
+from editable_gnn.algs.enn import ENN
+
 
 
 class BaseEditor(BaseTrainer):
-    def __init__(self, args, model: ENN, train_data: Data, whole_data: Data, 
+    def __init__(self, args, model, train_data: Data, whole_data: Data, 
                  model_config: Dict, output_dir: str, dataset_name: str, is_multi_label_task: bool, 
                  amp_mode: bool = False) -> None:
         super().__init__(args, model, train_data, whole_data, model_config, output_dir, 
@@ -97,7 +99,7 @@ class BaseEditor(BaseTrainer):
         return loc_idx
     
 class WholeGraphEditor(WholeGraphTrainer):
-    def __init__(self, args, model: ENN, train_data: Data, whole_data: Data, 
+    def __init__(self, args, model, train_data: Data, whole_data: Data, 
                  model_config: Dict, output_dir: str, dataset_name: str, is_multi_label_task: bool, 
                  amp_mode: bool = False) -> None:
         super().__init__(args, model, train_data, whole_data, model_config, output_dir, 
