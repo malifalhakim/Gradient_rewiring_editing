@@ -7,7 +7,6 @@ from torch_geometric.nn import GCNConv
 from .base import BaseGNNModel
 
 from .gcn import GCN
-from .gcn2 import GCN2
 from .sage import SAGE
 from .mlp import MLP
 
