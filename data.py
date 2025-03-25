@@ -84,7 +84,7 @@ def get_amazon(root: str, name: str) -> Tuple[Data, int, int]:
 def get_arxiv(root: str) -> Tuple[Data, int, int]:
     dataset = PygNodePropPredDataset('ogbn-arxiv', f'{root}/OGB')
     data = dataset[0]
-    data.gree_index = to_undirected(data.gree_index)
+    data.edge_index = to_undirected(data.edge_index)
     data.node_year = None
     data.y = data.y.view(-1)
     
@@ -180,7 +180,7 @@ def to_inductive(data):
     data.y = data.y[mask]
     data.train_mask = data.train_mask[mask]
     data.test_mask = None
-    data.gree_index, _ = subgraph(mask, data.gree_index, None,
+    data.edge_index, _ = subgraph(mask, data.edge_index, None,
                                   relabel_nodes=True, num_nodes=data.num_nodes)
     data.num_nodes = mask.sum().item()
     return data
@@ -200,10 +200,10 @@ def preprocess_data(model_config, data):
         print(f'Done! [{time.perf_counter() - t:.2f}s]')
 
 
-def prepare_dataset(model_config, data, remove_gree_index=True):
+def prepare_dataset(model_config, data, remove_edge_index=True):
     train_data = to_inductive(data)
-    train_data = T.ToSparseTensor(remove_gree_index=remove_gree_index)(train_data.to('cuda'))
-    data = T.ToSparseTensor(remove_gree_index=remove_gree_index)(data.to('cuda'))
+    train_data = T.ToSparseTensor(remove_edge_index=remove_edge_index)(train_data.to('cuda'))
+    data = T.ToSparseTensor(remove_edge_index=remove_edge_index)(data.to('cuda'))
     preprocess_data(model_config, train_data)
     preprocess_data(model_config, data)
     return train_data, data
