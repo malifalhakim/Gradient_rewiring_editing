@@ -61,7 +61,7 @@ if __name__ == '__main__':
     model = MODEL_FAMILY(in_channels=num_features, out_channels=num_classes, **model_config['architecture'])
     model.cuda()
     print(model)
-    train_data, whole_data = prepare_dataset(model_config, data, remove_gree_index=True)
+    train_data, whole_data = prepare_dataset(model_config, data, remove_edge_index=True)
     del data
     print(f'training data: {train_data}')
     print(f'whole data: {whole_data}')
