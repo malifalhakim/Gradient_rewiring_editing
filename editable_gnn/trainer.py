@@ -415,7 +415,7 @@ class BaseTrainer(object):
 
 
     def get_khop_neighbors_acc(self, model, num_hop, node_idx):
-        neighbors, _, pos, _ = k_hop_subgraph(node_idx, num_hops=num_hop, gree_index=self.whole_data.edge_index)
+        neighbors, _, pos, _ = k_hop_subgraph(node_idx, num_hops=num_hop, edge_index=self.whole_data.edge_index)
         out = self.prediction(model, self.whole_data)
         mask = torch.ones_like(neighbors, dtype=torch.bool)
         mask[pos] = False
