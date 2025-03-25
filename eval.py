@@ -113,7 +113,7 @@ if __name__ == '__main__':
         print(model)
         model.cuda()
 
-        train_data, whole_data = prepare_dataset(model_config, data, remove_gree_index=False)
+        train_data, whole_data = prepare_dataset(model_config, data, remove_edge_index=False)
         print(f'training data: {train_data}')
         print(f'whole data: {whole_data}')
         TRAINER_CLS = BaseTrainer if model_config['arch_name'] == 'MLP' else WholeGraphTrainer
